@@ -1,0 +1,27 @@
+*.class
+
+# Package Files #
+*.dex
+*.war
+*.ear
+*.apk
+bin/
+bin
+gen/
+release/
+release
+gen
+.metadata/
+.metadata
+.idea/
+.idea
+*.project
+.DS_Store
+target/
+
+*.iml
+
+*.DS_Store
+library/.settings/org.eclipse.jdt.core.prefs
+library/.project
+library/project.properties
