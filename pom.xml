@@ -5,13 +5,59 @@
 	<artifactId>compatibility-v7-appcompat</artifactId>
 	<version>19.0.2-SNAPSHOT</version>
 	<packaging>apklib</packaging>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<!--<directory>bin</directory>-->
+
+		<pluginManagement>
+			<plugins>
+				<!-- This plugin is to avoid m2e errors with android-maven-plugin -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+										<artifactId>android-maven-plugin</artifactId>
+										<versionRange>[3.2.0,)</versionRange>
+										<goals>
+											<goal>generate-sources</goal>
+											<goal>proguard</goal>
+											<goal>apklib</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute>
+											<runOnIncremental>true</runOnIncremental>
+										</execute>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		
 		<plugins>
+			<!--
+			For this plugin to work with Eclipse m2e you need to add the following line
+			to /etc/launchd.conf:
+			setenv ANDROID_HOME /path/to/your/AndroidSDK
+			-->
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
+				<version>3.9.0-rc.2</version>
 				<configuration>
 					<androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
 					<assetsDirectory>ignored</assetsDirectory>
@@ -20,7 +66,7 @@
 					<goal>jar-no-fork</goal>
 					<sdk>
 						<path>${env.ANDROID_HOME}</path>
-						<platform>16</platform>
+						<platform>17</platform>
 					</sdk>
 					<emulator>
 						<avd>18.0</avd>
@@ -29,7 +75,6 @@
 				</configuration>
 				<extensions>true</extensions>
 			</plugin>
-
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
@@ -63,12 +108,10 @@
 			<url>https://tools.projectgoth.com/nexus/content/groups/public</url>
 			<releases>
 				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
 				<checksumPolicy>warn</checksumPolicy>
 			</releases>
 			<snapshots>
 				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
 				<checksumPolicy>warn</checksumPolicy>
 			</snapshots>
 		</pluginRepository>
