@@ -12,42 +12,7 @@
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<!--<directory>bin</directory>-->
 
-		<pluginManagement>
-			<plugins>
-				<!-- This plugin is to avoid m2e errors with android-maven-plugin -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>com.jayway.maven.plugins.android.generation2</groupId>
-										<artifactId>android-maven-plugin</artifactId>
-										<versionRange>[3.2.0,)</versionRange>
-										<goals>
-											<goal>generate-sources</goal>
-											<goal>proguard</goal>
-											<goal>apklib</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute>
-											<runOnIncremental>true</runOnIncremental>
-										</execute>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-		
 		<plugins>
 			<!--
 			For this plugin to work with Eclipse m2e you need to add the following line
